@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PhD Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #faf8f4;
+    --surface: #ffffff;
+    --text: #1d1f23;
+    --muted: #5f6570;
+    --line: #e6e1d8;
+    --accent: #1f5f8b;
+    --accent-soft: #e4eef5;
+    --warm: #b4532a;
+    --warm-soft: #f8e9e1;
+    --green: #2f7a4f;
+    --green-soft: #e3f2e8;
+    --radius: 12px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #14161a;
+      --surface: #1c1f24;
+      --text: #ecebe7;
+      --muted: #a1a6ae;
+      --line: #2d3138;
+      --accent: #7fb6dd;
+      --accent-soft: #1d2e3b;
+      --warm: #e69a76;
+      --warm-soft: #3a261d;
+      --green: #7cc89b;
+      --green-soft: #1d3326;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 16px/1.6 "Inter", system-ui, sans-serif;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .wrap { max-width: 920px; margin: 0 auto; padding: 0 20px; }
+
+  /* Hero */
+  header { padding: 64px 0 36px; border-bottom: 1px solid var(--line); }
+  .hero { display: flex; gap: 28px; align-items: center; }
+  .hero img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+  h1, h2 { font-weight: 700; letter-spacing: -0.02em; }
+  h1 { font-size: clamp(2rem, 5vw, 2.8rem); margin: 0 0 4px; line-height: 1.15; }
+  .role { font-size: 1.1rem; color: var(--muted); margin: 0; }
+  .thesis { margin: 22px 0 8px; padding: 16px 18px; background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 8px; }
+  .thesis .label { font-size: .75rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); font-weight: 600; }
+  .thesis .ttl { font-weight: 600; font-size: 1.15rem; margin: 2px 0 6px; }
+  .thesis .meta { font-size: .9rem; color: var(--muted); }
+  .about { color: var(--muted); max-width: 640px; }
+  .links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+  .links a { font-size: .85rem; font-weight: 500; padding: 5px 12px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); color: var(--text); }
+  .links a:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
+
+  /* Nav */
+  nav { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+  nav .wrap { display: flex; gap: 10px; align-items: center; padding-top: 10px; padding-bottom: 10px; }
+  .navlinks { display: flex; gap: 4px; overflow-x: auto; flex: 1; scrollbar-width: none; }
+  .navlinks::-webkit-scrollbar { display: none; }
+  .navlinks a { white-space: nowrap; font-size: .85rem; color: var(--muted); padding: 6px 10px; border-radius: 8px; }
+  .navlinks a:hover { background: var(--accent-soft); color: var(--accent); text-decoration: none; }
+  #search { width: 170px; flex-shrink: 0; padding: 7px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); color: var(--text); font: inherit; font-size: .85rem; }
+  #search:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
+
+  /* Sections */
+  section { padding: 40px 0 8px; }
+  h2 { font-size: 1.45rem; margin: 0 0 4px; }
+  .intro { color: var(--muted); font-size: .92rem; margin: 0 0 18px; }
+  .year { font-size: .8rem; font-weight: 600; letter-spacing: .08em; color: var(--muted); margin: 22px 0 8px; }
+  .item { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 18px; margin-bottom: 10px; }
+  .item .t { font-weight: 600; line-height: 1.4; }
+  .item .m { font-size: .9rem; color: var(--muted); margin-top: 3px; }
+  .item .m b { color: var(--text); font-weight: 600; }
+  .item .acts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; font-size: .82rem; font-weight: 500; }
+  .badge { display: inline-block; font-size: .72rem; font-weight: 600; padding: 2px 8px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); margin-left: 6px; vertical-align: 2px; white-space: nowrap; }
+  .badge.warm { background: var(--warm-soft); color: var(--warm); }
+  .badge.green { background: var(--green-soft); color: var(--green); }
+
+  /* Teaching table */
+  .table-wrap { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+  table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+  th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line); }
+  th { font-size: .75rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); font-weight: 600; }
+  td.h, th.h { text-align: right; white-space: nowrap; }
+  tfoot td { font-weight: 600; border-bottom: none; }
+  .empty { color: var(--muted); font-style: italic; padding: 30px 0; text-align: center; }
+
+  footer { margin-top: 56px; padding: 24px 0 40px; border-top: 1px solid var(--line); color: var(--muted); font-size: .82rem; }
+
+  @media (max-width: 600px) {
+    header { padding-top: 40px; }
+    .hero { flex-direction: column; align-items: flex-start; gap: 16px; }
+    .hero img { width: 90px; height: 90px; }
+    #search { width: 110px; }
+    td, th { padding: 8px 10px; }
+  }
+</style>
+</head>
+<body>
+
+<header><div class="wrap" id="hero"></div></header>
+<nav><div class="wrap">
+  <div class="navlinks" id="navlinks"></div>
+  <input id="search" type="search" placeholder="Search…" aria-label="Search activities">
+</div></nav>
+<main class="wrap" id="main"></main>
+<footer><div class="wrap" id="foot"></div></footer>
+
+<script src="data.js"></script>
+<script>
+(function () {
+  const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const link = (url, text) => url ? `<a href="${esc(url)}" target="_blank" rel="noopener">${esc(text)}</a>` : "";
+  const joinMeta = parts => parts.filter(Boolean).join(" · ");
+  const boldMe = authors => {
+    const a = esc(authors);
+    const me = PROFILE.authorName && esc(PROFILE.authorName);
+    return me ? a.split(me).join(`<b>${me}</b>`) : a;
+  };
+  const acts = list => {
+    const html = list.filter(([u]) => u).map(([u, t]) => link(u, t)).join("");
+    return html ? `<div class="acts">${html}</div>` : "";
+  };
+  const yearOf = it => parseInt(String(it.year).slice(-4), 10) || 0;
+
+  const SECTIONS = [
+    { key: "publications", label: "Publications", stat: "Publications",
+      intro: "Peer-reviewed journal articles and conference papers.",
+      item: it => `<div class="t">${esc(it.title)}</div>
+        <div class="m">${boldMe(it.authors)}</div>
+        <div class="m"><i>${esc(it.venue)}</i></div>
+        ${acts([[it.doi, "DOI ↗"], [it.pdf, "PDF ↗"], [it.code, "Code ↗"]])}` },
+    { key: "preprints", label: "Preprints", stat: "Preprints",
+      intro: "Papers shared online before or during peer review.",
+      item: it => `<div class="t">${esc(it.title)}${it.status ? `<span class="badge warm">${esc(it.status)}</span>` : ""}</div>
+        <div class="m">${boldMe(it.authors)}</div>
+        ${it.venue ? `<div class="m"><i>${esc(it.venue)}</i></div>` : ""}
+        ${acts([[it.link, "Read ↗"]])}` },
+    { key: "reports", label: "Research Reports", stat: "Research reports",
+      intro: "Technical and research reports.",
+      item: it => `<div class="t">${esc(it.title)}</div>
+        <div class="m">${joinMeta([it.authors ? boldMe(it.authors) : "", esc(it.institution)])}</div>
+        ${acts([[it.link, "Read ↗"]])}` },
+    { key: "internships", label: "Internships", stat: "Internship reports",
+      intro: "Internship reports written before my PhD.",
+      item: it => `<div class="t">${esc(it.title)}</div>
+        <div class="m">${joinMeta([esc(it.institution), it.supervisor ? "Supervised by " + esc(it.supervisor) : "", esc(it.duration)])}</div>
+        ${acts([[it.link, "Read ↗"]])}` },
+    { key: "teaching", label: "Teaching", stat: "Teaching hours", table: true,
+      intro: "Classes I taught at university." },
+    { key: "supervision", label: "Supervision",
+      intro: "Student internships I supervised.",
+      item: it => {
+        const LV = { L1: "1st-year License", L2: "2nd-year License", L3: "3rd-year License", M1: "1st-year Master's", M2: "2nd-year Master's", ENGINEERING: "Final-year engineering"};
+        const lvl = LV[String(it.level).toUpperCase()] || it.level;
+        const title = it.topic || `${lvl} internship`;
+        return `<div class="t">${esc(title)}${it.level ? `<span class="badge">${esc(it.level)}</span>` : ""}</div>
+        <div class="m">${joinMeta([it.topic ? esc(lvl) + " internship" : "", it.student ? "Student: " + esc(it.student) : "", it.coSupervisors ? "Co-supervised with " + esc(it.coSupervisors) : "", esc(it.duration), esc(it.institution)])}</div>`; } },
+    { key: "conferences", label: "Conferences", stat: "Conference talks & posters",
+      intro: "Talks and posters at scientific conferences and workshops.",
+      item: it => {
+        const cls = /poster/i.test(it.type) ? "green" : "";
+        return `<div class="t">${esc(it.title)}${it.type ? `<span class="badge ${cls}">${esc(it.type)}</span>` : ""}</div>
+        ${it.authors ? `<div class="m">${boldMe(it.authors)}</div>` : ""}
+        <div class="m">${joinMeta([`<i>${esc(it.event)}</i>`, esc(it.location), esc(it.date)])}</div>
+        ${acts([[it.link, "Abstract ↗"]])}`; } },
+            { key: "fieldwork", label: "Fieldwork",
+      intro: "Field missions at sea and on the coast to collect acoustic data.",
+      item: it => `<div class="t">${esc(it.title)}</div>
+        ${joinMeta([esc(it.location), esc(it.dates)]) ? `<div class="m">${joinMeta([esc(it.location), esc(it.dates)])}</div>` : ""}
+        ${it.description ? `<div class="m">${esc(it.description)}</div>` : ""}
+        ${it.partners ? `<div class="m">Partners: ${esc(it.partners)}</div>` : ""}
+        ${acts([[it.link, "More ↗"]])}` },
+    { key: "outreach", label: "Outreach", stat: "Outreach talks",
+      intro: "Talks and events to share science with the general public.",
+      item: it => `<div class="t">${esc(it.title)}</div>
+        <div class="m">${joinMeta([`<b>${esc(it.event)}</b>`, esc(it.audience), esc(it.location), esc(it.date)])}</div>
+        ${acts([[it.link, "More ↗"]])}` },
+    { key: "summerSchools", label: "Summer Schools", stat: "Summer schools",
+      intro: "Summer schools I organized or attended.",
+      item: it => {
+        const cls = /organi/i.test(it.role) ? "warm" : "";
+        return `<div class="t">${esc(it.name)}${it.role ? `<span class="badge ${cls}">${esc(it.role)}</span>` : ""}</div>
+        <div class="m">${joinMeta([esc(it.location), esc(it.dates)])}</div>
+        ${it.details ? `<div class="m">${esc(it.details)}</div>` : ""}
+        ${acts([[it.link, "Website ↗"]])}`; } }
+  ];
+
+  const getList = key => (ACTIVITIES[key] || []).slice().sort((a, b) => yearOf(b) - yearOf(a));
+  const totalHours = list => list.reduce((s, it) => s + (Number(it.hours) || 0), 0);
+
+  // ----- Hero -----
+  const P = PROFILE, L = P.links || {};
+  const linkItems = [
+    [L.email && "mailto:" + L.email, "Email"], [L.orcid, "ORCID"], [L.scholar, "Google Scholar"],
+    [L.hal, "HAL"], [L.github, "GitHub"], [L.linkedin, "LinkedIn"], [L.cv, "CV (PDF)"]
+  ].filter(([u]) => u);
+
+  document.getElementById("hero").innerHTML = `
+    <div class="hero">
+      ${P.photo ? `<img src="${esc(P.photo)}" alt="${esc(P.name)}">` : ""}
+      <div>
+        <h1>${esc(P.name)}</h1>
+        <p class="role">${joinMeta([esc(P.role), esc(P.lab), esc(P.university)])}</p>
+      </div>
+    </div>
+    ${P.thesisTitle ? `<div class="thesis">
+      <div class="label">PhD Thesis · ${esc(P.period)}</div>
+      <div class="ttl">${esc(P.thesisTitle)}</div>
+      ${P.supervisors ? `<div class="meta">Advisors: ${esc(P.supervisors)}</div>` : ""}
+    </div>` : ""}
+    ${P.about ? `<p class="about">${esc(P.about)}</p>` : ""}
+    <div class="links">${linkItems.map(([u, t]) => `<a href="${esc(u)}" target="_blank" rel="noopener">${t}</a>`).join("")}</div>`;
+  document.title = `${P.name} · PhD Portfolio`;
+
+  document.getElementById("navlinks").innerHTML =
+    SECTIONS.filter(s => (ACTIVITIES[s.key] || []).length).map(s => `<a href="#${s.key}">${s.label}</a>`).join("");
+
+  document.getElementById("foot").innerHTML =
+    `© ${new Date().getFullYear()} ${esc(P.name)} · Last updated ${new Date(document.lastModified).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}`;
+
+  // ----- Sections -----
+  function render(query) {
+    const q = (query || "").trim().toLowerCase();
+    const match = it => !q || Object.values(it).join(" ").toLowerCase().includes(q);
+    let html = "", shown = 0;
+
+    for (const s of SECTIONS) {
+      const list = getList(s.key).filter(match);
+      if (!list.length) continue;
+      shown++;
+      let body;
+      if (s.table) {
+        body = `<div class="table-wrap"><table>
+          <thead><tr><th>Year</th><th>Course</th><th>Level</th><th>Type</th><th class="h">Hours</th></tr></thead>
+          <tbody>${list.map(it => `<tr>
+            <td>${esc(it.year)}</td>
+            <td><b>${esc(it.course)}</b><br><span style="color:var(--muted);font-size:.82rem">${esc(it.institution)}</span></td>
+            <td>${esc(it.level)}</td><td>${esc(it.type)}</td><td class="h">${esc(it.hours)} h</td></tr>`).join("")}</tbody>
+          <tfoot><tr><td colspan="4">Total</td><td class="h">${totalHours(list)} h</td></tr></tfoot>
+        </table></div>`;
+      } else {
+        let lastYear = null;
+        const anyYear = list.some(it => yearOf(it));
+        body = list.map(it => {
+          const y = yearOf(it);
+          const head = anyYear && y !== lastYear ? `<div class="year">${y || "Undated"}</div>` : "";
+          lastYear = y;
+          return head + `<div class="item">${s.item(it)}</div>`;
+        }).join("");
+      }
+      html += `<section id="${s.key}">
+        <h2>${s.label}</h2>
+        <p class="intro">${s.intro}</p>${body}</section>`;
+    }
+    document.getElementById("main").innerHTML =
+      shown ? html : `<p class="empty">No results for “${esc(query)}”.</p>`;
+  }
+
+  render("");
+  document.getElementById("search").addEventListener("input", e => render(e.target.value));
+})();
+</script>
+</body>
+</html>
