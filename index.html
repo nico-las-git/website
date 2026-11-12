@@ -14,9 +14,10 @@
     --muted: #666666;
     --line: #dddddd;
     --accent: #1a4f8b;
+    --title: #0b2a4a;
   }
   * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; scroll-padding-top: 60px; }
+  html { scroll-behavior: smooth; scroll-padding-top: 16px; }
   body {
     margin: 0;
     background: var(--bg);
@@ -25,32 +26,32 @@
   }
   a { color: var(--accent); text-decoration: none; }
   a:hover { text-decoration: underline; }
-  .wrap { max-width: 880px; margin: 0 auto; padding: 0 20px; }
+  .wrap { max-width: 1060px; margin: 0 auto; padding: 0 20px; }
 
   /* Header */
   header { padding: 48px 0 24px; }
   .hero { display: flex; gap: 24px; align-items: center; }
   .hero img { width: 110px; height: 110px; border-radius: 4px; object-fit: cover; flex-shrink: 0; }
-  h1 { font-size: 2rem; font-weight: 700; margin: 0 0 2px; line-height: 1.2; }
+  h1 { color: var(--title); font-size: 2rem; font-weight: 700; margin: 0 0 2px; line-height: 1.2; }
   .role { color: var(--muted); margin: 0; }
   .thesis { margin: 18px 0 0; }
   .about { margin: 12px 0 0; }
   .links { margin-top: 12px; font-size: .95rem; }
   .links a + a::before { content: "|"; color: var(--line); margin: 0 10px; display: inline-block; }
 
-  /* Nav */
-  nav { position: sticky; top: 0; z-index: 10; background: var(--bg); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-  nav .wrap { display: flex; gap: 12px; align-items: center; padding-top: 8px; padding-bottom: 8px; }
-  .navlinks { display: flex; flex-wrap: wrap; gap: 4px 16px; flex: 1; }
-  .navlinks::-webkit-scrollbar { display: none; }
-  .navlinks a { white-space: nowrap; font-size: .9rem; color: var(--text); }
-  .navlinks a:hover { color: var(--accent); }
-  #search { width: 140px; flex-shrink: 0; padding: 5px 8px; border: 1px solid var(--line); border-radius: 3px; background: var(--bg); color: var(--text); font: inherit; font-size: .85rem; }
+  /* Layout: menu column on the left */
+  header { border-bottom: 1px solid var(--line); }
+  .layout { display: grid; grid-template-columns: 190px 1fr; gap: 48px; align-items: start; }
+  aside { position: sticky; top: 0; padding-top: 32px; }
+  .navlinks { display: flex; flex-direction: column; gap: 2px; margin-top: 14px; }
+  .navlinks a { font-size: .95rem; color: var(--text); padding: 4px 0 4px 10px; border-left: 2px solid transparent; }
+  .navlinks a:hover { color: var(--title); border-left-color: var(--title); text-decoration: none; }
+  #search { width: 100%; padding: 6px 8px; border: 1px solid var(--line); border-radius: 3px; background: var(--bg); color: var(--text); font: inherit; font-size: .88rem; }
   #search:focus { outline: none; border-color: var(--accent); }
 
   /* Sections */
   section { padding: 32px 0 0; }
-  h2 { font-size: 1.3rem; font-weight: 700; margin: 0 0 6px; padding-bottom: 6px; border-bottom: 1px solid var(--line); }
+  h2 { color: var(--title); font-size: 1.3rem; font-weight: 700; margin: 0 0 6px; padding-bottom: 6px; border-bottom: 1px solid var(--line); }
   .intro { color: var(--muted); font-size: .9rem; margin: 0 0 12px; }
   .year { font-weight: 700; font-size: .95rem; margin: 18px 0 6px; }
   .item { margin: 0 0 14px; }
@@ -73,22 +74,27 @@
 
   footer { margin-top: 48px; padding: 18px 0 32px; border-top: 1px solid var(--line); color: var(--muted); font-size: .82rem; }
 
-  @media (max-width: 600px) {
+  @media (max-width: 760px) {
     header { padding-top: 32px; }
     .hero { flex-direction: column; align-items: flex-start; gap: 14px; }
     .hero img { width: 90px; height: 90px; }
-    #search { width: 110px; }
+    .layout { grid-template-columns: 1fr; gap: 0; }
+    aside { position: static; padding-top: 20px; }
+    .navlinks { flex-direction: row; flex-wrap: wrap; gap: 4px 16px; }
+    .navlinks a { padding: 2px 0; border-left: none; }
   }
 </style>
 </head>
 <body>
 
 <header><div class="wrap" id="hero"></div></header>
-<nav><div class="wrap">
-  <div class="navlinks" id="navlinks"></div>
-  <input id="search" type="search" placeholder="Search…" aria-label="Search activities">
-</div></nav>
-<main class="wrap" id="main"></main>
+<div class="wrap layout">
+  <aside>
+    <input id="search" type="search" placeholder="Search…" aria-label="Search activities">
+    <nav class="navlinks" id="navlinks"></nav>
+  </aside>
+  <main id="main"></main>
+</div>
 <footer><div class="wrap" id="foot"></div></footer>
 
 <script src="data.js"></script>
@@ -226,7 +232,7 @@
         const anyYear = list.some(it => yearOf(it));
         body = list.map(it => {
           const y = yearOf(it);
-          const head = anyYear && y !== lastYear ? `<div class="year">${y || "Undated"}</div>` : "";
+          const head = anyYear && y !== lastYear ? (y ? `<div class="year">${y}</div>` : `<div class="year"></div>`) : "";
           lastYear = y;
           return head + `<div class="item">${s.item(it)}</div>`;
         }).join("");
