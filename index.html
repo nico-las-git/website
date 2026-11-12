@@ -9,103 +9,75 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #faf8f4;
-    --surface: #ffffff;
-    --text: #1d1f23;
-    --muted: #5f6570;
-    --line: #e6e1d8;
-    --accent: #1f5f8b;
-    --accent-soft: #e4eef5;
-    --warm: #b4532a;
-    --warm-soft: #f8e9e1;
-    --green: #2f7a4f;
-    --green-soft: #e3f2e8;
-    --radius: 12px;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #14161a;
-      --surface: #1c1f24;
-      --text: #ecebe7;
-      --muted: #a1a6ae;
-      --line: #2d3138;
-      --accent: #7fb6dd;
-      --accent-soft: #1d2e3b;
-      --warm: #e69a76;
-      --warm-soft: #3a261d;
-      --green: #7cc89b;
-      --green-soft: #1d3326;
-    }
+    --bg: #ffffff;
+    --text: #222222;
+    --muted: #666666;
+    --line: #dddddd;
+    --accent: #1a4f8b;
   }
   * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+  html { scroll-behavior: smooth; scroll-padding-top: 60px; }
   body {
     margin: 0;
     background: var(--bg);
     color: var(--text);
-    font: 16px/1.6 "Inter", system-ui, sans-serif;
+    font: 16px/1.55 "Inter", Helvetica, Arial, sans-serif;
   }
   a { color: var(--accent); text-decoration: none; }
   a:hover { text-decoration: underline; }
-  .wrap { max-width: 920px; margin: 0 auto; padding: 0 20px; }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 20px; }
 
-  /* Hero */
-  header { padding: 64px 0 36px; border-bottom: 1px solid var(--line); }
-  .hero { display: flex; gap: 28px; align-items: center; }
-  .hero img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
-  h1, h2 { font-weight: 700; letter-spacing: -0.02em; }
-  h1 { font-size: clamp(2rem, 5vw, 2.8rem); margin: 0 0 4px; line-height: 1.15; }
-  .role { font-size: 1.1rem; color: var(--muted); margin: 0; }
-  .thesis { margin: 22px 0 8px; padding: 16px 18px; background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 8px; }
-  .thesis .label { font-size: .75rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); font-weight: 600; }
-  .thesis .ttl { font-weight: 600; font-size: 1.15rem; margin: 2px 0 6px; }
-  .thesis .meta { font-size: .9rem; color: var(--muted); }
-  .about { color: var(--muted); max-width: 640px; }
-  .links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
-  .links a { font-size: .85rem; font-weight: 500; padding: 5px 12px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); color: var(--text); }
-  .links a:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
+  /* Header */
+  header { padding: 48px 0 24px; }
+  .hero { display: flex; gap: 24px; align-items: center; }
+  .hero img { width: 110px; height: 110px; border-radius: 4px; object-fit: cover; flex-shrink: 0; }
+  h1 { font-size: 2rem; font-weight: 700; margin: 0 0 2px; line-height: 1.2; }
+  .role { color: var(--muted); margin: 0; }
+  .thesis { margin: 18px 0 0; }
+  .about { margin: 12px 0 0; }
+  .links { margin-top: 12px; font-size: .95rem; }
+  .links a + a::before { content: "|"; color: var(--line); margin: 0 10px; display: inline-block; }
 
   /* Nav */
-  nav { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
-  nav .wrap { display: flex; gap: 10px; align-items: center; padding-top: 10px; padding-bottom: 10px; }
-  .navlinks { display: flex; gap: 4px; overflow-x: auto; flex: 1; scrollbar-width: none; }
+  nav { position: sticky; top: 0; z-index: 10; background: var(--bg); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  nav .wrap { display: flex; gap: 12px; align-items: center; padding-top: 8px; padding-bottom: 8px; }
+  .navlinks { display: flex; flex-wrap: wrap; gap: 4px 16px; flex: 1; }
   .navlinks::-webkit-scrollbar { display: none; }
-  .navlinks a { white-space: nowrap; font-size: .85rem; color: var(--muted); padding: 6px 10px; border-radius: 8px; }
-  .navlinks a:hover { background: var(--accent-soft); color: var(--accent); text-decoration: none; }
-  #search { width: 170px; flex-shrink: 0; padding: 7px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); color: var(--text); font: inherit; font-size: .85rem; }
-  #search:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
+  .navlinks a { white-space: nowrap; font-size: .9rem; color: var(--text); }
+  .navlinks a:hover { color: var(--accent); }
+  #search { width: 140px; flex-shrink: 0; padding: 5px 8px; border: 1px solid var(--line); border-radius: 3px; background: var(--bg); color: var(--text); font: inherit; font-size: .85rem; }
+  #search:focus { outline: none; border-color: var(--accent); }
 
   /* Sections */
-  section { padding: 40px 0 8px; }
-  h2 { font-size: 1.45rem; margin: 0 0 4px; }
-  .intro { color: var(--muted); font-size: .92rem; margin: 0 0 18px; }
-  .year { font-size: .8rem; font-weight: 600; letter-spacing: .08em; color: var(--muted); margin: 22px 0 8px; }
-  .item { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 18px; margin-bottom: 10px; }
+  section { padding: 32px 0 0; }
+  h2 { font-size: 1.3rem; font-weight: 700; margin: 0 0 6px; padding-bottom: 6px; border-bottom: 1px solid var(--line); }
+  .intro { color: var(--muted); font-size: .9rem; margin: 0 0 12px; }
+  .year { font-weight: 700; font-size: .95rem; margin: 18px 0 6px; }
+  .item { margin: 0 0 14px; }
   .item .t { font-weight: 600; line-height: 1.4; }
-  .item .m { font-size: .9rem; color: var(--muted); margin-top: 3px; }
+  .item .m { font-size: .92rem; color: var(--muted); }
   .item .m b { color: var(--text); font-weight: 600; }
-  .item .acts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; font-size: .82rem; font-weight: 500; }
-  .badge { display: inline-block; font-size: .72rem; font-weight: 600; padding: 2px 8px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); margin-left: 6px; vertical-align: 2px; white-space: nowrap; }
-  .badge.warm { background: var(--warm-soft); color: var(--warm); }
-  .badge.green { background: var(--green-soft); color: var(--green); }
+  .item .acts { display: flex; flex-wrap: wrap; gap: 14px; font-size: .88rem; }
+  .badge { font-size: .85rem; font-weight: 400; color: var(--muted); margin-left: 6px; white-space: nowrap; }
+  .badge::before { content: "["; }
+  .badge::after { content: "]"; }
 
   /* Teaching table */
-  .table-wrap { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
-  table { width: 100%; border-collapse: collapse; font-size: .9rem; }
-  th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line); }
-  th { font-size: .75rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); font-weight: 600; }
+  .table-wrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: .92rem; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { font-weight: 700; border-bottom: 2px solid var(--text); }
   td.h, th.h { text-align: right; white-space: nowrap; }
-  tfoot td { font-weight: 600; border-bottom: none; }
-  .empty { color: var(--muted); font-style: italic; padding: 30px 0; text-align: center; }
+  tfoot td { font-weight: 700; border-bottom: none; }
+  .empty { color: var(--muted); padding: 30px 0; }
 
-  footer { margin-top: 56px; padding: 24px 0 40px; border-top: 1px solid var(--line); color: var(--muted); font-size: .82rem; }
+  footer { margin-top: 48px; padding: 18px 0 32px; border-top: 1px solid var(--line); color: var(--muted); font-size: .82rem; }
 
   @media (max-width: 600px) {
-    header { padding-top: 40px; }
-    .hero { flex-direction: column; align-items: flex-start; gap: 16px; }
+    header { padding-top: 32px; }
+    .hero { flex-direction: column; align-items: flex-start; gap: 14px; }
     .hero img { width: 90px; height: 90px; }
     #search { width: 110px; }
-    td, th { padding: 8px 10px; }
   }
 </style>
 </head>
@@ -149,13 +121,13 @@
         <div class="m">${boldMe(it.authors)}</div>
         ${it.venue ? `<div class="m"><i>${esc(it.venue)}</i></div>` : ""}
         ${acts([[it.link, "Read ↗"]])}` },
-    { key: "reports", label: "Research Reports", stat: "Research reports",
+    { key: "reports", label: "Reports", stat: "Research reports",
       intro: "Technical and research reports.",
       item: it => `<div class="t">${esc(it.title)}</div>
         <div class="m">${joinMeta([it.authors ? boldMe(it.authors) : "", esc(it.institution)])}</div>
         ${acts([[it.link, "Read ↗"]])}` },
     { key: "internships", label: "Internships", stat: "Internship reports",
-      intro: "Internship reports written before my PhD.",
+      intro: "Internship reports written before and during my PhD.",
       item: it => `<div class="t">${esc(it.title)}</div>
         <div class="m">${joinMeta([esc(it.institution), it.supervisor ? "Supervised by " + esc(it.supervisor) : "", esc(it.duration)])}</div>
         ${acts([[it.link, "Read ↗"]])}` },
@@ -164,7 +136,7 @@
     { key: "supervision", label: "Supervision",
       intro: "Student internships I supervised.",
       item: it => {
-        const LV = { L1: "1st-year License", L2: "2nd-year License", L3: "3rd-year License", M1: "1st-year Master's", M2: "2nd-year Master's", ENGINEERING: "Final-year engineering"};
+        const LV = { L1: "1st-year Bachelor's", L2: "2nd-year Bachelor's", L3: "3rd-year Bachelor's", M1: "1st-year Master's", M2: "2nd-year Master's", ENGINEERING: "Final-year engineering" };
         const lvl = LV[String(it.level).toUpperCase()] || it.level;
         const title = it.topic || `${lvl} internship`;
         return `<div class="t">${esc(title)}${it.level ? `<span class="badge">${esc(it.level)}</span>` : ""}</div>
@@ -177,7 +149,7 @@
         ${it.authors ? `<div class="m">${boldMe(it.authors)}</div>` : ""}
         <div class="m">${joinMeta([`<i>${esc(it.event)}</i>`, esc(it.location), esc(it.date)])}</div>
         ${acts([[it.link, "Abstract ↗"]])}`; } },
-            { key: "fieldwork", label: "Fieldwork",
+    { key: "fieldwork", label: "Fieldwork",
       intro: "Field missions at sea and on the coast to collect acoustic data.",
       item: it => `<div class="t">${esc(it.title)}</div>
         ${joinMeta([esc(it.location), esc(it.dates)]) ? `<div class="m">${joinMeta([esc(it.location), esc(it.dates)])}</div>` : ""}
@@ -217,13 +189,10 @@
         <p class="role">${joinMeta([esc(P.role), esc(P.lab), esc(P.university)])}</p>
       </div>
     </div>
-    ${P.thesisTitle ? `<div class="thesis">
-      <div class="label">PhD Thesis · ${esc(P.period)}</div>
-      <div class="ttl">${esc(P.thesisTitle)}</div>
-      ${P.supervisors ? `<div class="meta">Advisors: ${esc(P.supervisors)}</div>` : ""}
-    </div>` : ""}
+    ${P.thesisTitle ? `<p class="thesis"><b>PhD thesis</b>${P.period ? ` (${esc(P.period)})` : ""}: <i>${esc(P.thesisTitle)}</i>
+      ${P.supervisors ? `<br>Advisors: ${esc(P.supervisors)}` : ""}</p>` : ""}
     ${P.about ? `<p class="about">${esc(P.about)}</p>` : ""}
-    <div class="links">${linkItems.map(([u, t]) => `<a href="${esc(u)}" target="_blank" rel="noopener">${t}</a>`).join("")}</div>`;
+    ${linkItems.length ? `<div class="links">${linkItems.map(([u, t]) => `<a href="${esc(u)}" target="_blank" rel="noopener">${t}</a>`).join("")}</div>` : ""}`;
   document.title = `${P.name} · PhD Portfolio`;
 
   document.getElementById("navlinks").innerHTML =
